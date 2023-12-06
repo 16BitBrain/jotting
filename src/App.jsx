@@ -10,23 +10,35 @@ import Notes from './components/Notes'
 import NoteForm from './components/Form'
 
 function App() {
+  // a custom hook that manages the state related to notes
   const { notes, initNotes } = useNotes()
+
+  // note: represents the currently selected or edited note
+  // openForm: A flag to determine whether the note form is open or closed
 
   const [note, setEditingNote] = useState({ id: '', title: '', text: '' })
   const [openForm, setOpenForm] = useState(false)
 
+  // searchedNotes: Notes filtered based on the search query
+  // searchQ: The current search query
   const [searchedNotes, setSearchedNotes] = useState([])
   const [searchQ, setSearchQ] = useState('')
 
+  // fetchNotes: function to fetch notes from the server and initialize the notes state
   const fetchNotes = async () => {
+    // listNotes is an asynchronous action to fetch notes
     const datas = await listNotes()
-    initNotes(datas)
+
+    initNotes(datas) // init notes, also update the hooks value for notes
   }
 
+  // handleSearch: function to handle the search functionality
   const handleSearch = (query) => {
     setSearchQ(query)
 
+    // filter notes based on the search query
     const searchedNotes = notes.filter((note) => {
+      // join both title and the content of note for maximum search
       const joinedText = `${note.title} ${note.text}`.toLowerCase()
 
       return joinedText.includes(query.toLowerCase())
@@ -35,20 +47,25 @@ function App() {
     setSearchedNotes(searchedNotes)
   }
 
+  // handleEditNote: function to handle editing a specific note
   const handleEditNote = (note) => {
     setEditingNote(note)
   }
 
+  // openHandler: function to toggle the visibility of the note form when in mobile view
   const openHandler = () => {
     setOpenForm(!openForm)
   }
 
+  // track the changes of note (note that will be edited)
+  // this useEffect will automatically open the form when a note is being edited
   useEffect(() => {
-    if (!note.id) return
+    if (!note.id) return // if there is no note to be edited, then return
 
     setOpenForm(!openForm)
   }, [note])
 
+  // fetch notes when the component mounts
   useEffect(() => {
     fetchNotes()
   }, [])

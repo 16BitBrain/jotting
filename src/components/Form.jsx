@@ -14,33 +14,44 @@ export default function NoteForm({
   formOpened,
   closeFormOnMobile,
 }) {
+  // cccess note-related functions from the useNotes context
   const { addNote, commitNote } = useNotes()
+
+  // define a default note
   const defaultNote = {
     id: '',
     title: '',
     text: '',
   }
 
+  // state to manage the form data and errors
   const [formData, setFormData] = useState(defaultNote)
   const [errors, setErrors] = useState({})
 
+  // function to reset the form data and errors
   const cleanForm = () => {
     setFormData(defaultNote)
     setErrors({})
     onEdit(defaultNote)
   }
 
+  // event handler for title input change
   const handleTitleChange = (e) => {
+    // dDestructure the name and value from the event target
     const { name, value } = e.target
+
+    // split the input value into an array of lines based on newline characters
     const lines = value.split('\n')
 
     if (value.length > 50) {
       return
     }
 
+    // check if there are more than 2 lines in the title
     if (lines.length > 2) {
+      // extract the first two lines, join them with newline characters,
+      // and update the form data accordingly
       const croppedValue = lines.slice(0, 2).join('\n')
-
       setFormData((prevData) => ({ ...prevData, [name]: croppedValue }))
     }
 
@@ -49,12 +60,13 @@ export default function NoteForm({
     }
   }
 
+  // event handler for text input change
   const handleTextChange = (e) => {
     const { name, value } = e.target
-
     setFormData((prevData) => ({ ...prevData, [name]: value }))
   }
 
+  // event handler for form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault()
 
@@ -63,18 +75,19 @@ export default function NoteForm({
     }
 
     try {
+      // validate the form data using Zod schema
       noteSchema.parse(formData)
 
+      // perform different actions based on whether it's a new note or an edit
       if (!formData.id) {
         const note = await createNote(formData.title, formData.text)
-
         addNote(note)
       } else {
         const note = await editNote(formData.id, formData.title, formData.text)
-
         commitNote(note.id, note)
       }
 
+      // reset the form after successful submission
       cleanForm()
     } catch (error) {
       if (error instanceof ZodError) {
@@ -88,10 +101,10 @@ export default function NoteForm({
     }
   }
 
+  // update the form data when the note prop changes (note to be edited)
   useEffect(() => {
     if (!note.id) return
 
-    // set the initial text in the form
     setFormData({ id: note.id, title: note.title, text: note.text })
   }, [note])
 
@@ -128,7 +141,6 @@ export default function NoteForm({
               id='text'
               name='text'
               onChange={handleTextChange}
-              // onInput={handleTextChange}
               value={formData.text}
               placeholder='Sometimes, on Mondays ...'
               className='form-text note-scrollbar'
