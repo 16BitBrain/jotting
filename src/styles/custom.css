@@ -1,0 +1,16 @@
+.note-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4a5568 #edf2f7; /* thumb and track color */
+}
+
+.note-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a5568; /* thumb color */
+}
+
+.note-scrollbar::-webkit-scrollbar-track {
+  background-color: #edf2f7; /* track color */
+}
