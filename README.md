@@ -16,8 +16,9 @@ Welcome to the React + Firebase Notes App! 🚀
 
 ![Preview](/assets/1.png)
 ![Preview](/assets/2.png)
-![Preview](/assets/3.png)
-![Preview](/assets/4.png)
+
+| ![Preview](/assets/3.png) | ![Preview](/assets/4.png) |
+| ------------------------------ | --------------------------- |
 
 ## Getting Started
 
