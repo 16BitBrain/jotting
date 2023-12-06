@@ -27,7 +27,7 @@ Welcome to the React + Firebase Notes App! 🚀
 3. Configure Firebase:
    - Create a Firebase project and set up Firestore
    - Enable Firebase Authentication with email/password
-   - Add Firebase configuration in `/src/firebaseConfig.js`
+   - Add Firebase configuration in `/src/config/firebase.js`
 
 ```javascript
 // /src/config/firebase.js
