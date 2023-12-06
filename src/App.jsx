@@ -26,15 +26,11 @@ function App() {
   const handleSearch = (query) => {
     setSearchQ(query)
 
-    console.log(query)
     const searchedNotes = notes.filter((note) => {
       const joinedText = `${note.title} ${note.text}`.toLowerCase()
 
-
       return joinedText.includes(query.toLowerCase())
     })
-
-    console.log(searchedNotes)
 
     setSearchedNotes(searchedNotes)
   }
