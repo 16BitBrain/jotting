@@ -6,9 +6,9 @@ Welcome to the React + Firebase Notes App! 🚀
 
 ## Features
 
-✨ Create, edit, and delete notes with ease
-🔄 Real-time updates with Firebase Firestore
-🌐 Responsive design for a seamless experience on all devices
+- ✨ Create, edit, and delete notes with ease
+- 🔄 Real-time updates with Firebase Firestore
+- 🌐 Responsive design for a seamless experience on all devices
 
 ## Screenshots
 
