@@ -22,7 +22,7 @@ Welcome to the React + Firebase Notes App! 🚀
 
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/your-username/notes-app.git`
+1. Clone the repository: `git clone https://github.com/16BitBrain/jotting`
 2. Install dependencies: `npm install`
 3. Configure Firebase:
    - Create a Firebase project and set up Firestore
